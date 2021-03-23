@@ -11,23 +11,23 @@ DEBUG = False
 # ========================================================================================================================================================= 
 
 
-
-
 # stampa di debug
 def debugPrint(message):
-	if(DEBUG):
-		print("[",end='')
-		cprint("D",'yellow',end='')
-		print("]", message)
+    if (DEBUG):
+        print("[", end='')
+        cprint("D", 'yellow', end='')
+        print("]", message)
+
 
 # stampa di informazione generica
 def infoPrint(message):
-		print("[",end='')
-		cprint("I",'green',end='')
-		print("]", message)
+    print("[", end='')
+    cprint("I", 'green', end='')
+    print("]", message)
+
 
 # stampa di errore
 def errorPrint(message):
-    print("[",end='')
-    cprint("E",'red',end='')
+    print("[", end='')
+    cprint("E", 'red', end='')
     print("] " + message)
