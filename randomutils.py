@@ -16,5 +16,4 @@ def extractRandomNumber(lb, ub):
         a.append(i)
     return random.choice(a)
 
-#github demmerda porcooid
-
+#github è bellissimo
