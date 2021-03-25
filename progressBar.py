@@ -1,3 +1,14 @@
+# =============================================================================
+# PARENT MODULES
+
+if __name__ == "__main__":
+    pass
+else:
+    pass
+
+# =============================================================================
+
+
 # data una percentuale restituisce una stringa corrispondente alla barra di caricamento
 def progressBar(percentage: int, size=1):
 	progressCharacter = "#"
