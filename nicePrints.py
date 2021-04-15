@@ -1,4 +1,20 @@
 from termcolor import colored, cprint
+import platform
+
+
+#fix per windows
+if("Windows" in platform.system()):
+    import colorama
+    colorama.init()
+
+# =============================================================================
+# PARENT MODULES
+
+if __name__ == "__main__":
+    pass
+else:
+    pass
+
 
 # ========================================================================================================================================================= 
 # VARIABILI GLOBALI
@@ -7,6 +23,10 @@ from termcolor import colored, cprint
 # deve essere True o False, in maniera tale che la funzione debugPrint sa se deve stampare un messaggio o no
 DEBUG = False
 
+#Tipo di tag del messaggio:
+#   0: [I] [E] [D]
+#   1: [INFO] [ERRORE] [DEBUG]
+TAG_TYPE = 0
 
 # ========================================================================================================================================================= 
 
@@ -15,19 +35,28 @@ DEBUG = False
 def debugPrint(message):
     if (DEBUG):
         print("[", end='')
-        cprint("D", 'yellow', end='')
+        if(TAG_TYPE == 0):
+            cprint("D", 'yellow', end='')
+        if(TAG_TYPE == 1):
+            cprint("DEBUG", 'yellow', end='')
         print("]", message)
 
 
 # stampa di informazione generica
 def infoPrint(message):
     print("[", end='')
-    cprint("I", 'green', end='')
+    if(TAG_TYPE == 0):
+        cprint("I", 'green', end='')
+    if(TAG_TYPE == 1):
+        cprint("INFO", 'green', end='')
     print("]", message)
 
 
 # stampa di errore
 def errorPrint(message):
     print("[", end='')
-    cprint("E", 'red', end='')
+    if(TAG_TYPE == 0):
+        cprint("E", 'red', end='')
+    if(TAG_TYPE == 1):
+        cprint("ERRORE", 'red', end='')
     print("] " + message)
