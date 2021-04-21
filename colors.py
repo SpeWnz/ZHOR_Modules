@@ -1,5 +1,5 @@
 '''
-Mini libreria per facilitare l'uso di termcolors
+Mini libreria per facilitare l\'uso di termcolors
 '''
 
 
@@ -23,26 +23,34 @@ else:
 
 # ========================================================================================================================================================= 
 
-def grey(message, end="\n"):
-    cprint(message,'grey',end=end)
+def grey(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'grey',end='')
+    print(nonColoredMessage,end=END)
 
-def red(message, end="\n"):
-    cprint(message,'red',end=end)
+def red(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'red',end='')
+    print(nonColoredMessage,end=END)
 
-def green(message, end="\n"):
-    cprint(message,'green',end=end)
+def green(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'green',end='')
+    print(nonColoredMessage,end=END)
 
-def yellow(message, end="\n"):
-    cprint(message,'yellow',end=end)
+def yellow(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'yellow',end='')
+    print(nonColoredMessage,end=END)
 
-def blue(message, end="\n"):
-    cprint(message,'blue',end=end)
+def blue(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'blue',end='')
+    print(nonColoredMessage,end=END)
 
-def magenta(message, end="\n"):
-    cprint(message,'magenta',end=end)
+def magenta(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'magenta',end='')
+    print(nonColoredMessage,end=END)
 
-def cyan(message, end="\n"):
-    cprint(message,'cyan',end=end)
+def cyan(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'cyan',end='')
+    print(nonColoredMessage,end=END)
 
-def white(message, end="\n"):
-    cprint(message,'white',end=end)
+def white(coloredMessage,nonColoredMessage="", END="\n"):
+    cprint(coloredMessage,'white',end='')
+    print(nonColoredMessage,end=END)
