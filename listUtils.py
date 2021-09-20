@@ -8,6 +8,8 @@ else:
 
 # =============================================================================
 
+#np.DEBUG = True
+
 # mostra in maniera carina e ordinata tutti gli elementi di una lista
 def fancyPrint(inputList: list, printType=0):
     
@@ -24,16 +26,34 @@ def fancyPrint(inputList: list, printType=0):
                 print(str(i+1) + ". \t",end='')
                 for item in inputList[i]:
                     print(item,"\t",end='')
-                
-                
-
-
+                print("\n",end='')
+    
+            # se è una lista di tuple, stampa in questo modo:
+            # 1. elem1 --- elem2 --- elem3 --- ... elemN
+            # 2. elem1 --- elem2 --- elem3 --- ... elemN
+            # 3. elem1 --- elem2 --- elem3 --- ... elemN
+            if(type(inputList[i]) is tuple):
+                print(str(i+1) + ". \t",end='')
+                for item in inputList[i]:
+                    print(item,"\t",end='')
+                print("\n",end='')
 
     else:
         # da implementare per il futuro
         np.errorPrint("NON SONO STATI IMPLEMENTATI ALTRI TIPI")
         raise NotImplemented
         pass
+
+# data in input una lista di due dimensioni (presumibilmente una tabella) 
+# la stampa in maniera carina e ordinata
+def tablePrint(inputTwoDimensionalList: list):  
+    for row in inputTwoDimensionalList:
+        for value in row:
+            print(value,end=" ")
+
+        print("\n",end="")
+
+    
 
 
 

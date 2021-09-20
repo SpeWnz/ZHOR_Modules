@@ -24,3 +24,10 @@ def clear():
     else:
         os.system("clear")
 
+def deleteFile(fileName: str):
+    if isWindows():
+        os.system("del " + fileName)
+    else:
+        os.system("rm " + fileName)
+
+
