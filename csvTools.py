@@ -4,11 +4,13 @@
 if __name__ == "__main__":
     import fileManager
     import nicePrints
-    #print("POTATOOOOOOOOOOOOOOOOOO")
 else:
-    #print("CARROTTTTTTTTTTTTTTTTTT")
     from . import nicePrints
     from . import fileManager
+
+# OTHER MODULES
+from bs4 import BeautifulSoup
+import csv
 
 # =============================================================================
 
@@ -108,3 +110,17 @@ def makeHTMLTable(inputFile,outputFile,columns,styleFile=None):
     with open(OUTPUT_FILE_PATH,'w') as f:
         for html_line in HTML_LINES:
             f.write("%s\n" % html_line)
+
+
+# Converte un file html contentente LA SOLA TAG PER LA TABELLA
+# (si suppone quindi di avere a che fare con un file creato apposta per contenere solo quella tabella)
+def htmlTableToCSV(inputFile: str, outputFileName: str):
+    file = open(inputFile,'r')
+    soup = BeautifulSoup(file,features='lxml')
+    table = soup.find('table')
+    headers = [str(th.text) for th in table.select("tr th")]
+
+    with open(outputFileName, "w") as f:
+        wr = csv.writer(f)
+        wr.writerow(headers)
+        wr.writerows([[td.text.encode("utf-8") for td in row.find_all("td")] for row in table.select("tr + tr")])
