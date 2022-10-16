@@ -10,6 +10,9 @@ else:
 
 # =============================================================================
 
+DEFAULT_FILE_ENCODING = 'utf-8' # encoding di default usato per leggere e scrivere file
+
+
 # dato un path di un file restituisce quel path senza estensione del file
 def getFilePath_withoutExtention(filePath: str):
     return os.path.splitext(filePath)[0]
@@ -26,7 +29,8 @@ def getFileExtention(filePath: str):
 
 # riversa le righe di un file in una lista (NON SEPARA I VALORI)
 def fileToSimpleList(inputFile):
-    fileLines = open(inputFile, 'r').readlines()
+    #https://stackoverflow.com/questions/49562499/how-to-fix-unicodedecodeerror-charmap-codec-cant-decode-byte-0x9d-in-posit
+    fileLines = open(inputFile, 'r',encoding=DEFAULT_FILE_ENCODING).readlines()
     outputList = []
 
     for lines in fileLines:
@@ -79,7 +83,7 @@ def sectionedFileToDict(inputFile: str):
 
 
 # data una lista in input scrive un file con le righe della lista
-def listToFile(inputList: list, fileName: str):
-    with open(fileName, 'w') as f:
+def listToFile(inputList: list, fileName: str,mode='w'):
+    with open(fileName, mode,encoding=DEFAULT_FILE_ENCODING) as f:
         for item in inputList:
             f.write("%s\n" % item)

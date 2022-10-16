@@ -31,3 +31,9 @@ def deleteFile(fileName: str):
         os.system("rm " + fileName)
 
 
+def pressEnterToExit(newLines=0):
+    for i in range(0,newLines):
+        print("\n",end='')
+
+    input("Press enter to exit the application")
+    exit()

@@ -35,7 +35,7 @@ def randomYESarray():
     return outputArray
 
 # Restituisce una stringa casuale
-def randomString(stringLength: int,upperLetters=True,lowerLetters=True,numbers=True):
+def randomString(stringLength: int,upperLetters=True,lowerLetters=True,numbers=True,specialChars=True):
     
     if((upperLetters is False) and (lowerLetters is False) and (numbers is False)):
         nicePrints.errorPrint("Bisogna specificare almeno uno dei due campi da randomizzare.")
@@ -54,6 +54,10 @@ def randomString(stringLength: int,upperLetters=True,lowerLetters=True,numbers=T
     #aggiunge numeri
     if(numbers):
         choices += string.digits
+
+    #aggiunge caratteri speciali
+    if(specialChars):
+        choices += str('#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
 
     return ''.join(random.choices(choices, k=stringLength))
 

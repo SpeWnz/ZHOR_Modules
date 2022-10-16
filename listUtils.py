@@ -56,11 +56,52 @@ def tablePrint(inputTwoDimensionalList: list):
     
 
 
+def concatenate(inputList: list, delimiter=None):
+    if delimiter is None:
+        return "".join(inputList)
+
+    else:
+        return delimiter.join(inputList)
 
 # Converte una lista in una stringa
 def listToString(inputList: list):
-    output = ""
-    for item in inputList:
-        output += str(item)
+    return "".join(inputList)
+
+
+
+# restituisce una lista di elementi che si trovano in "firstList" ma non in "secondList"
+# checkSubstring: controlla la presenza o l'assenza anche sottoforma di sottostringa
+# bidirectionalSubstring: fa il controllo "checkSubstring" in entrambe le direzioni, invece che solo da firstList a secondList
+def uncommonElements(firstList: list, secondList: list, checkSubString=False, bidirectionalSubstring=False):
+
+    def inListWSubstring(ITEM):
+        for item in secondList:
+            if ITEM in item:
+                return True
+
+            if bidirectionalSubstring:
+                if item in ITEM:
+                    return True
+
+        return False
+
+    outputList = []
+
+    # opz 1: controllo senza checkSubstring
+    if not checkSubString:
+        for item in firstList:
+            if item not in secondList:
+                outputList.append(item)
+
+        return outputList
+
     
-    return output
+    # opz 2: controllo con checkSubstring
+    if checkSubString:
+        for item in firstList:
+            if not inListWSubstring(item):
+                outputList.append(item)
+
+        return outputList
+
+    
