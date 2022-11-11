@@ -2,12 +2,13 @@
 # PARENT MODULES
 
 if __name__ == "__main__":
-    import nicePrints as np
-    import random
+    import nicePrints as np  
 else:
     from . import nicePrints as np
-    import random
+    
 
+import random
+import re
 # =============================================================================
 
 
@@ -46,4 +47,6 @@ def randomMACAddress(differentFrom: list = None):
         return mac
 
 
-print(randomMACAddress(["9a:54:47:8a:3f:a0","b9:50:9e:21:9a:87"]))
+# data una stringa estrae l'ip usando espressioni regolari (regex)
+def parseIP_fromString(inputString: str):
+    return re.findall( r'[0-9]+(?:\.[0-9]+){3}', inputString)
