@@ -46,4 +46,4 @@ def randomMACAddress(differentFrom: list = None):
         return mac
 
 
-print(randomMACAddress(["9a:54:47:8a:3f:a0","b9:50:9e:21:9a:87"]))
+#print(randomMACAddress(["9a:54:47:8a:3f:a0","b9:50:9e:21:9a:87"]))

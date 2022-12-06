@@ -63,9 +63,11 @@ def concatenate(inputList: list, delimiter=None):
     else:
         return delimiter.join(inputList)
 
-# Converte una lista in una stringa
-def listToString(inputList: list):
-    return "".join(inputList)
+# Converte una lista in una stringa.
+# Per default unisce tutti gli elementi della lista con un ""
+# Altrimenti si può specificare, ad esempio può essere uno spazio
+def listToString(inputList: list, joinCharacter=""):
+    return joinCharacter.join(inputList)
 
 
 
@@ -105,3 +107,8 @@ def uncommonElements(firstList: list, secondList: list, checkSubString=False, bi
         return outputList
 
     
+def toLowerAll(inputList: list):
+    return [x.lower() for x in inputList]
+
+def toUpperAll(inputList: list):
+    return [x.upper() for x in inputList]
