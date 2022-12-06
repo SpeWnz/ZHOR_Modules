@@ -55,8 +55,8 @@ def tablePrint(inputTwoDimensionalList: list):
 
     
 
-
-def concatenate(inputList: list, delimiter=None):
+#concatena tutti gli elementi di una lista
+def concatenate_elements(inputList: list, delimiter=None):
     if delimiter is None:
         return "".join(inputList)
 
@@ -112,3 +112,11 @@ def toLowerAll(inputList: list):
 
 def toUpperAll(inputList: list):
     return [x.upper() for x in inputList]
+
+
+# prende una lista e la divide in N pezzi.
+# restituisce una lista di N sottoliste
+# https://stackoverflow.com/questions/2130016/splitting-a-list-into-n-parts-of-approximately-equal-length
+def splitList(inputList: list, count: int):
+    k, m = divmod(len(inputList), count)
+    return list(inputList[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(count))

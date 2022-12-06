@@ -84,6 +84,6 @@ def sectionedFileToDict(inputFile: str):
 
 # data una lista in input scrive un file con le righe della lista
 def listToFile(inputList: list, fileName: str,mode='w'):
-    with open(fileName, mode,encoding=DEFAULT_FILE_ENCODING) as f:
+    with open(fileName, mode=mode,encoding=DEFAULT_FILE_ENCODING) as f:
         for item in inputList:
             f.write("%s\n" % item)
