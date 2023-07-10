@@ -31,8 +31,14 @@ TAG_TYPE = 0
 # ========================================================================================================================================================= 
 
 
+
 # stampa di debug
-def debugPrint(message):
+def debugPrint(message,lock=None):
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+
     if (DEBUG):
         print("[", end='')
         if(TAG_TYPE == 0):
@@ -41,9 +47,19 @@ def debugPrint(message):
             cprint("DEBUG", 'yellow', end='')
         print("]", message)
 
+    if lock is None:
+        pass
+    else:
+        lock.release()
+
 
 # stampa di informazione generica
-def infoPrint(message):
+def infoPrint(message,lock=None):
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+
     print("[", end='')
     if(TAG_TYPE == 0):
         cprint("I", 'green', end='')
@@ -51,12 +67,28 @@ def infoPrint(message):
         cprint("INFO", 'green', end='')
     print("]", message)
 
+    if lock is None:
+        pass
+    else:
+        lock.release()
+
 
 # stampa di errore
-def errorPrint(message):
+def errorPrint(message,lock=None):
+
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+
     print("[", end='')
     if(TAG_TYPE == 0):
         cprint("E", 'red', end='')
     if(TAG_TYPE == 1):
         cprint("ERRORE", 'red', end='')
     print("] " + message)
+
+    if lock is None:
+        pass
+    else:
+        lock.release()

@@ -2,11 +2,11 @@
 # PARENT MODULES
 
 if __name__ == "__main__":
-    import fileManager
-    import nicePrints
+    import fileManager as fm
+    import nicePrints as fm
 else:
-    from . import nicePrints
-    from . import fileManager
+    from . import nicePrints as np
+    from . import fileManager as fm
 
 # OTHER MODULES
 from bs4 import BeautifulSoup
@@ -15,6 +15,7 @@ import csv
 # =============================================================================
 
 
+np.errorPrint("csvTools.py is deprecated. Use csvUtils.py instead.")
 
 
 # riversa i dati (le righe) di un file strutturato tipo csv in una lista di liste
