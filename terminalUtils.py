@@ -1,5 +1,6 @@
 import os
 import subprocess
+import base64
 
 # restituisce una lista contenente i terminali disponibili
 def getAvailableTerminals(printResults=False):
@@ -36,6 +37,27 @@ def spawn_xterm(command: str, windowTitle: str, workingDirectory=None,executeInB
     if(executeInBackground):
         spawnStr += " &"
     
+    os.system(spawnStr)
+
+
+def spawn_xterm_b64(command: str, windowTitle: str,executeInBackground=True,width=80,height=24,xPos=0,yPos=0):
+    
+    encodedBytes = base64.b64encode(command.encode('utf-8'))
+    b64command = encodedBytes.decode('utf-8')
+
+    spawnStr = 'xterm -T "{}" -geometry {}x{}+{}+{} -e "echo {} | base64 -d | sh"'.format(
+        windowTitle,
+        width,
+        height,
+        xPos,
+        yPos,
+        b64command
+        )
+    
+    if(executeInBackground):
+        spawnStr += " &"
+    
+    #subprocess.call(args=[spawnStr],shell=True)
     os.system(spawnStr)
 
 #esegue un comando in una finestra di qterminal
