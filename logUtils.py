@@ -25,6 +25,21 @@ def logError(fileName: str,message: str, lock=None):
     else:
         lock.release()
 
+def logDebug(fileName: str,message: str, lock=None):
+    
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+    
+    np.errorPrint(message)
+    open(fileName,'a').write("[DEBUG] " + message + "\n")
+    
+    if lock is None:
+        pass
+    else:
+        lock.release()
+
 def logInfo(fileName: str,message: str, lock=None):
     
     if lock is None:

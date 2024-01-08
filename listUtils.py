@@ -120,3 +120,7 @@ def toUpperAll(inputList: list):
 def splitList(inputList: list, count: int):
     k, m = divmod(len(inputList), count)
     return list(inputList[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(count))
+
+
+def removeDuplicates(inputList: list):
+    return list(dict.fromkeys(inputList))
