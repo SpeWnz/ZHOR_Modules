@@ -38,10 +38,20 @@ def checkMutExArgs(sysArgv_arguments: list, mutuallyExclusiveArguments: list,err
 # return False, altrimenti
 def checkMutIncArgs(sysArgv_arguments: list, mutuallyInclusiveArguments: list,errorMessage="Mutually inclusive arguments: "):
     
-    for item in mutuallyInclusiveArguments:
-        if item not in sysArgv_arguments:
-            np.errorPrint(errorMessage + lu.listToString(mutuallyInclusiveArguments,' '))
-            return True
+    counter = 0
 
+    for item in mutuallyInclusiveArguments:
+        if item in sysArgv_arguments:
+            counter += 1
+
+    if counter == 0:
+        return True
+    
+    if len(mutuallyInclusiveArguments) == counter:
+        return True
+    
+    np.errorPrint(errorMessage + lu.listToString(mutuallyInclusiveArguments,' '))
     return False
+
+
 
