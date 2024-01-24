@@ -1,6 +1,5 @@
 termcolor
 bs4
-base64
 colorama
 platform
 requests
