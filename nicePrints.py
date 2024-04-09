@@ -23,9 +23,15 @@ else:
 # deve essere True o False, in maniera tale che la funzione debugPrint sa se deve stampare un messaggio o no
 DEBUG = False
 
+# lock utilizzato per i messaggi di stampa di nicePrints. Per default è vuoto, va impostato quando crei un nuovo
+# script. Ad es: 
+# PRINT_LOCK = threading.Lock()
+# Per default quindi nicePrints non è auto-bloccante. Devi esplicitamente specificare che vuoi un thread lock
+PRINT_LOCK = None
+
 #Tipo di tag del messaggio:
-#   0: [I] [E] [D]
-#   1: [INFO] [ERRORE] [DEBUG]
+#   0: [I] [E] [D] [?]
+#   1: [INFO] [ERROR] [DEBUG] [QUESTION]
 TAG_TYPE = 0
 
 # ========================================================================================================================================================= 
@@ -33,7 +39,7 @@ TAG_TYPE = 0
 
 
 # stampa di debug
-def debugPrint(message,lock=None):
+def debugPrint(message,lock=PRINT_LOCK):
     if lock is None:
         pass
     else:
@@ -54,7 +60,7 @@ def debugPrint(message,lock=None):
 
 
 # stampa di informazione generica
-def infoPrint(message,lock=None):
+def infoPrint(message,lock=PRINT_LOCK):
     if lock is None:
         pass
     else:
@@ -74,7 +80,7 @@ def infoPrint(message,lock=None):
 
 
 # stampa di errore
-def errorPrint(message,lock=None):
+def errorPrint(message,lock=PRINT_LOCK):
 
     if lock is None:
         pass
@@ -85,7 +91,27 @@ def errorPrint(message,lock=None):
     if(TAG_TYPE == 0):
         cprint("E", 'red', end='')
     if(TAG_TYPE == 1):
-        cprint("ERRORE", 'red', end='')
+        cprint("ERROR", 'red', end='')
+    print("] " + message)
+
+    if lock is None:
+        pass
+    else:
+        lock.release()
+
+# stampa di una domanda / prompt
+def questionPrint(message,lock=PRINT_LOCK):
+
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+
+    print("[", end='')
+    if(TAG_TYPE == 0):
+        cprint("?", 'cyan', end='')
+    if(TAG_TYPE == 1):
+        cprint("QUESTION", 'cyan', end='')
     print("] " + message)
 
     if lock is None:
