@@ -1,20 +1,22 @@
-import base64
-import urllib.parse
+import json
 
-def urlEncode_encodeString(input_string):
-    # Encode the input string with URL encoding
-    encoded_string = urllib.parse.quote_plus(input_string)
-    return encoded_string
+def jsonFile2dict(jsonFilePath: str):
+    
+    # Open the JSON file in read mode
+    with open(jsonFilePath, 'r') as json_file:
+        # Load the JSON data into a dictionary
+        data_dict = json.load(json_file)
 
-def base64_encodeString(input_string: str):
-    # Encode the input string to bytes using utf-8 encoding
-    input_bytes = input_string.encode('utf-8')
-    
-    # Use base64 encoding to encode the bytes
-    encoded_bytes = base64.b64encode(input_bytes)
-    
-    # Decode the bytes back to string and return
-    encoded_string = encoded_bytes.decode('utf-8')
-    
-    return encoded_string
+    return data_dict
 
+
+def dict2jsonFile(inputDict: dict, outputJsonFilePath: str):
+
+    # Open the JSON file in write mode
+    with open(outputJsonFilePath, 'w') as json_file:
+        # Write the dictionary to the JSON file
+        json.dump(inputDict, json_file)
+
+
+def loadConfig(fileName='config.json'):
+    return jsonFile2dict(fileName)

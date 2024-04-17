@@ -9,6 +9,7 @@ else:
 
 import random
 import re
+import ipaddress
 # =============================================================================
 
 
@@ -51,3 +52,22 @@ def randomMACAddress(differentFrom: list = None):
 # data una stringa estrae l'ip usando espressioni regolari (regex)
 def parseIP_fromString(inputString: str):
     return re.findall( r'[0-9]+(?:\.[0-9]+){3}', inputString)
+
+
+
+
+
+def get_ip_range(start_ip, end_ip):
+    # Convert the start and end IP addresses to IPv4Address objects
+    start = ipaddress.IPv4Address(start_ip)
+    end = ipaddress.IPv4Address(end_ip)
+    
+    # Iterate over the IP address range and print each IP address
+    current_ip = start
+    out = []
+    while current_ip <= end:
+        print(str(current_ip))
+        current_ip += 1
+        out.append(current_ip)
+
+    return out
