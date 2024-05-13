@@ -10,7 +10,7 @@ else:
 # =============================================================================
 
 
-def logError(fileName: str,message: str, lock=None):
+def logError(message: str,fileName="log.txt", lock=None):
     
     if lock is None:
         pass
@@ -25,14 +25,14 @@ def logError(fileName: str,message: str, lock=None):
     else:
         lock.release()
 
-def logDebug(fileName: str,message: str, lock=None):
+def logDebug(message: str,fileName="log.txt", lock=None):
     
     if lock is None:
         pass
     else:
         lock.acquire()
     
-    np.errorPrint(message)
+    np.debugPrint(message)
     open(fileName,'a').write("[DEBUG] " + message + "\n")
     
     if lock is None:
@@ -40,7 +40,7 @@ def logDebug(fileName: str,message: str, lock=None):
     else:
         lock.release()
 
-def logInfo(fileName: str,message: str, lock=None):
+def logInfo(message: str,fileName="log.txt", lock=None):
     
     if lock is None:
         pass
