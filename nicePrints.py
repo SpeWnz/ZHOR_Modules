@@ -118,3 +118,23 @@ def questionPrint(message,lock=PRINT_LOCK):
         pass
     else:
         lock.release()
+        
+# stampa di warning
+def warningPrint(message,lock=PRINT_LOCK):
+
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+
+    print("[", end='')
+    if(TAG_TYPE == 0):
+        cprint("W", 'light_yellow', end='')
+    if(TAG_TYPE == 1):
+        cprint("WARNING", 'light_yellow', end='')
+    print("] " + message)
+
+    if lock is None:
+        pass
+    else:
+        lock.release()
