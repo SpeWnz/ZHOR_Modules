@@ -1,4 +1,7 @@
 # =============================================================================
+
+import itertools
+
 # PARENT MODULES
 
 if __name__ == "__main__":
@@ -18,7 +21,7 @@ def fancyPrint(inputList: list, printType=0):
             if(type(inputList[i]) is str):
                 print(str(i+1) + ". \t",inputList[i])
 
-            # se c'è una sottolista, stampa in questo modo:
+            # se c'Ã¨ una sottolista, stampa in questo modo:
             # 1. elem1 --- elem2 --- elem3 --- ... elemN
             # 2. elem1 --- elem2 --- elem3 --- ... elemN
             # 3. elem1 --- elem2 --- elem3 --- ... elemN
@@ -28,7 +31,7 @@ def fancyPrint(inputList: list, printType=0):
                     print(item,"\t",end='')
                 print("\n",end='')
     
-            # se è una lista di tuple, stampa in questo modo:
+            # se Ã¨ una lista di tuple, stampa in questo modo:
             # 1. elem1 --- elem2 --- elem3 --- ... elemN
             # 2. elem1 --- elem2 --- elem3 --- ... elemN
             # 3. elem1 --- elem2 --- elem3 --- ... elemN
@@ -65,7 +68,7 @@ def concatenate_elements(inputList: list, delimiter=None):
 
 # Converte una lista in una stringa.
 # Per default unisce tutti gli elementi della lista con un ""
-# Altrimenti si può specificare, ad esempio può essere uno spazio
+# Altrimenti si puÃ² specificare, ad esempio puÃ² essere uno spazio
 def listToString(inputList: list, joinCharacter=""):
     return joinCharacter.join(inputList)
 
@@ -124,3 +127,15 @@ def splitList(inputList: list, count: int):
 
 def removeDuplicates(inputList: list):
     return list(dict.fromkeys(inputList))
+
+
+
+# prende una lista di liste ---> [l1,l2,l3, ...., lN]
+# restituisce una lista di "finte tuple" contenenti le possibili permutazioni degli elementi di quelle tre liste.
+# esempio con 3 liste: 
+# L1 = [a,b,c], L2 = [1,2,3], L3 = [Â£,$,%]
+# allora il risultato sarÃ : [ [a,1,Â£],[a,1,$],[a,1,%],[a,2,Â£,],[a,2,$], ..... ]
+# Utile in contesti come gli script in SPTT dedicati all password spray, in cui ho ad esempio:
+# la lista dei target, la lista degli username, la lista delle password
+def listsElementsPermutations(inputLists: list):
+    return [list(item) for item in itertools.product(*inputLists)]
