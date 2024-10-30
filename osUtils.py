@@ -65,3 +65,22 @@ def splitFile_parts(filePath: str, parts: int,suffix: str):
 def splitFile_lines(filePath: str, lines: int,suffix: str):
     com = 'split -l {} "{}" --additional-suffix "{}"'.format(str(lines),filePath,suffix)
     os.system(com)
+
+
+# takes an absolute path and returns a list of all files within it (with the absolute path prepended to them)
+# if specified, it can also return the list of files without the prepended absolute path (as a second return), via the "returnFiles" parameter
+def dirPathLS(absolutePath: str, returnFiles=False):
+    files = os.listdir(absolutePath)
+    outputList = []
+
+    for f in files:
+        if isWindows():
+            outputList.append(absolutePath + "\\" + f)
+        else:
+            outputList.append(absolutePath + "/" + f)
+
+    if not returnFiles:
+        return outputList
+    
+    else:
+        return outputList, files
