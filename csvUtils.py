@@ -21,6 +21,7 @@ from datetime import datetime
 
 # ottiene un timestamp del tipo dd-mm-yyyy_hh-mm-ss
 def getTimeStamp():
+    np.warningPrint("csvUtils.getTimeStamp(): This method is deprecated, please use timestampsUtils.py instead.")
     currentDateTime = datetime.now()
     outStr = "{}-{}-{}_{}-{}-{}".format(
         currentDateTime.day,

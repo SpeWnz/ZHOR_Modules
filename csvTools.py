@@ -15,7 +15,7 @@ import csv
 # =============================================================================
 
 
-np.errorPrint("csvTools.py is deprecated. Use csvUtils.py instead.")
+np.warningPrint("csvTools.py is deprecated. Please use csvUtils.py instead.")
 
 
 # riversa i dati (le righe) di un file strutturato tipo csv in una lista di liste
