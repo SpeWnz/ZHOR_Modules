@@ -1,4 +1,6 @@
+import pathlib
 import os
+import hashlib
 
 # =============================================================================
 # PARENT MODULES
@@ -87,3 +89,32 @@ def listToFile(inputList: list, fileName: str,mode='w'):
     with open(fileName, mode=mode,encoding=DEFAULT_FILE_ENCODING) as f:
         for item in inputList:
             f.write("%s\n" % item)
+
+
+# returns true if a file exists, false if not
+def fileExists(filePath: str):
+    f = pathlib.Path(filePath)
+    return f.is_file()
+
+# returns true if a dir exists, false if not
+def dirExists(dirPath: str):
+    f = pathlib.Path(filePath)
+    return f.is_dir()
+
+
+# gets the MD5 hash of a file
+def getMD5Sum(filePath: str):
+    return hashlib.md5(open(filePath,'rb').read()).hexdigest()
+
+# gets the SHA1 hash of a file
+def getSHA1Sum(filePath: str):
+    return hashlib.sha1(open(filePath,'rb').read()).hexdigest()
+
+
+# using MD5,returns true if the file are identical, false if not
+def compareMD5(filePath1:str, filePath2: str):
+    return getMD5Sum(filePath1) == getMD5Sum(filePath2)
+
+# using SHA1, returns true if the file are identical, false if not
+def compareSHA1(filePath1:str, filePath2: str):
+    return getSHA1Sum(filePath1) == getSHA1Sum(filePath2)
