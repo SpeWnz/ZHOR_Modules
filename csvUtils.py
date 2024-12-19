@@ -14,6 +14,8 @@ else:
 # OTHER MODULES
 import os
 from datetime import datetime
+import pandas as pd
+import sqlite3
 
 # =============================================================================
 
@@ -243,3 +245,75 @@ def lod2CSV_v2(lod: list, csvPath: str,externalKey_name=None, externalKey_value=
 
     
     fm.listToFile(csvLines,csvPath,mode=mode)
+
+# takes a string, a charset, and a replacing character as input.
+# the charset is just a string with characters you want to replace.
+# the "replacing character" is that character you are replacing the charset with.
+# for example: if the string is "hello123", the charset is "ho123", and the replacingcharacter is "_"
+# then the resulting string will be "_"
+def stringSanification(inputString: str, charset: str, replacingCharacter: str):
+    for char in inputString:
+        if char in charset:
+            inputString = inputString.replace(char,replacingCharacter)
+            
+    return inputString
+
+# generic implementation: converts a csv file into a sqlite db file
+def csv2db(csvFile: str, dbFile: str, tableName: str, separator=',',overwrite=False):
+
+    # insert more blacklist characters as they are found
+    charactersBlacklist = ':.-+*/#?!,;' 
+
+    # should we append data to the db or create a new db?
+    if overwrite and fm.fileExists(dbFile):
+        os.remove(dbFile)
+
+    # curry function for datbase types
+    def get_sqlite_type(series):
+        if pd.api.types.is_integer_dtype(series):
+            return 'INTEGER'
+        elif pd.api.types.is_float_dtype(series):
+            return 'REAL'
+        else:
+            return 'TEXT'
+
+    # dataframe construction and values stripping
+    df = pd.read_csv(csvFile,sep=separator)
+    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+
+    # apply further string sanifications for the csv header only
+    df.columns = df.columns.map(lambda x: x.replace(' ','_'))
+    df.columns = df.columns.map(lambda x: stringSanification(x,charactersBlacklist,''))
+
+    # apply sanification rules to table name as well
+    tableName = stringSanification(tableName,charactersBlacklist,'')
+
+    # create SQLite database and connect to it
+    conn = sqlite3.connect(dbFile)
+    cursor = conn.cursor()
+
+    # create the table based on CSV columns and types
+    columns = df.columns.tolist()
+    column_defs = []    
+
+    # determine variable types for the database
+    for col in columns:
+        column_type = get_sqlite_type(df[col])
+        column_defs.append(f"{col} {column_type}")
+
+    # create the table
+    create_table_query = "CREATE TABLE IF NOT EXISTS {} ({});".format(tableName,', '.join(column_defs))
+    cursor.execute(create_table_query)
+
+    # pour data into the table
+    for row in df.itertuples(index=False, name=None):
+        com = "INSERT INTO {} ({}) VALUES ({})".format(
+            tableName,
+            ', '.join(columns),
+            ', '.join(['?'] * len(row))
+        )
+        cursor.execute(com, row)
+
+    # Commit and close
+    conn.commit()
+    conn.close()
