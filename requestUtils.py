@@ -10,6 +10,9 @@ else:
 
 # =============================================================================
 
+BURP_PROXY_DEFAULT = {"http": "http://127.0.0.1:8080", "https": "http://127.0.0.1:8080"}
+
+
 def requestFile2Headers(inputFile: str, startingIndex=0):
     lines = fm.fileToSimpleList(inputFile)
 
