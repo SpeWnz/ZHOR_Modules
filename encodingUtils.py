@@ -1,5 +1,11 @@
 import base64
 import urllib.parse
+import re
+
+# input: string and regex
+# output: string without characters that do not match the regex
+def stringRegexSanify(inputString: str, regex):
+    return ''.join(re.findall(regex,inputString))
 
 def urlEncode_encodeString(input_string):
     # Encode the input string with URL encoding
@@ -95,7 +101,7 @@ def urlEncode_allSpecialCharacters(inputString: str):
     outputString = ""
     for char in inputString:
         if char in d2:
-            outputString += d[char]
+            outputString += d2[char]
         else:
             outputString += char
     return outputString

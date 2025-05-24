@@ -45,16 +45,29 @@ def pressEnterToContinue(msg="Press enter to continue"):
 
 # returns stdout and stderr of a command
 # usage: stdout, stderr = commandResult(" ... ")
-def commandResult(command: str):
+def commandResult(command):
     #print("COMMAND RESULT")
-    result = subprocess.run(command.split(' '),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    return result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+    
+    if type(command) is str:
+        result = subprocess.run(command.split(' '),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        return result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+    
+    if type(command) is list:
+        result = subprocess.run(command,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        return result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+
+
 
 
 def countLines(filePath: str):
-    com = "wc -l {}".format(filePath)
+    com = ['wc','-l',filePath]
+    print(com)
+    
+    stdout, stderr = commandResult(com)
+    print(stdout,stderr)
     count, _ = commandResult(com)
     count = count.split(' ')[0]
+    
     
     return int(count) + 1
     
