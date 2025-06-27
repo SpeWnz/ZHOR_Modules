@@ -61,10 +61,6 @@ def commandResult(command):
 
 def countLines(filePath: str):
     com = ['wc','-l',filePath]
-    print(com)
-    
-    stdout, stderr = commandResult(com)
-    print(stdout,stderr)
     count, _ = commandResult(com)
     count = count.split(' ')[0]
     

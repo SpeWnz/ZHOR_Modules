@@ -21,6 +21,26 @@ import os
 
 # =============================================================================
 
+# wrapper for macchanger
+# if the parameter "mac" is not specified, the mac is random.
+# the mac must comply with the following format:
+# XX:XX:XX:XX:XX:XX
+def changeWlanCardMAC(wlanCard: str,mac=None):
+    com1 = f'ifconfig {wlanCard} down'
+    
+    com2 = ""
+    if mac is None:
+        com2 = f'macchanger -r {wlanCard}'
+    else:
+        com2 = f'macchanger "{mac}" {wlanCard}'
+
+    com3 = f'ifconfig {wlanCard} up'
+
+    os.system(com1)
+    os.system(com2)
+    os.system(com3)
+
+
 # Takes a airodump-ng csv file (not the one with "kismet" in its name)
 # and produces a structured and organized sqlite db file.
 # the overwrite parameter (if set to true) lets you delete the db and start all over

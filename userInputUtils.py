@@ -51,3 +51,32 @@ def promptOptions(message: str, options: list,errorMessage="Invalid choice. Plea
             
             else:
                 print("Invalid choice. Please, retry.")
+
+
+# prompts the user to select a value from the list.
+# for example, if the list is ["item1","item2","item3"]
+# then the prompt will be like this:
+#
+# Please choose one item from the list:
+# 1. item1
+# 2. item2
+# 3. item3
+#
+# the function returns a tuple: (chosenIndex,chosenValue)
+# note that the chosen index does not start at 0, but 1
+def interactiveListSelection(inputList: list,promptMessage="Please choose one item from the list:",errorMessage="Invalid choice. Please retry.",printType=0):
+    np.infoPrint(promptMessage)
+    lu.fancyPrint(inputList,printType)
+    chosenIndex = None
+    
+    
+    while True:
+
+        chosenIndex = int(input("> "))
+
+        if (chosenIndex) > len(inputList) or (chosenIndex <= 0):
+            np.errorPrint("Invalid choice, please retry")
+        else:
+            break
+
+    return chosenIndex,inputList[chosenIndex - 1]

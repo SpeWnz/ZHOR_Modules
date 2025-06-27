@@ -7,10 +7,35 @@ else:
     from . import nicePrints as np
 
 
+import threading
+
 # =============================================================================
 
 
-def logError(message: str,fileName="log.txt", lock=None,stdout=True):
+LOG_PATH = 'log.log'    # default log path
+
+# specifically logs exceptions and traceback.
+# usage: logu.logException(traceback,e,fileName='path here')
+# remember to "import traceback" in your projeect
+def logException(tracebackObject,exceptionObject,fileName=LOG_PATH,lock=None,stdout=True):
+    
+    if lock is None:
+        pass
+    else:
+        lock.acquire()
+    
+    if stdout:
+        np.errorPrint(f'The following exception occurred: {exceptionObject}. Check the traceback in the log.')
+
+    msg = f'[EXCEPTION] {exceptionObject}. Traceback: {tracebackObject.format_exc()} \n'
+    open(fileName,'a').write(msg)
+    
+    if lock is None:
+        pass
+    else:
+        lock.release()
+
+def logError(message: str,fileName=LOG_PATH, lock=None,stdout=True):
     
     if lock is None:
         pass
@@ -27,7 +52,7 @@ def logError(message: str,fileName="log.txt", lock=None,stdout=True):
     else:
         lock.release()
 
-def logDebug(message: str,fileName="log.txt", lock=None,stdout=True):
+def logDebug(message: str,fileName=LOG_PATH, lock=None,stdout=True):
     
     if lock is None:
         pass
@@ -44,7 +69,7 @@ def logDebug(message: str,fileName="log.txt", lock=None,stdout=True):
     else:
         lock.release()
 
-def logInfo(message: str,fileName="log.txt", lock=None,stdout=True):
+def logInfo(message: str,fileName=LOG_PATH, lock=None,stdout=True):
     
     if lock is None:
         pass

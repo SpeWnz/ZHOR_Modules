@@ -30,9 +30,10 @@ def getFileExtention(filePath: str):
 
 
 # riversa le righe di un file in una lista (NON SEPARA I VALORI)
-def fileToSimpleList(inputFile):
+def fileToSimpleList(inputFile,errors='ignore'):
     #https://stackoverflow.com/questions/49562499/how-to-fix-unicodedecodeerror-charmap-codec-cant-decode-byte-0x9d-in-posit
-    fileLines = open(inputFile, 'r',encoding=DEFAULT_FILE_ENCODING).readlines()
+    fileLines = open(inputFile, 'r',encoding=DEFAULT_FILE_ENCODING,errors=errors).readlines()
+    
     outputList = []
 
     for lines in fileLines:
