@@ -1,7 +1,4 @@
 termcolor
 bs4
 colorama
-platform
 requests
-subprocess
-re
