@@ -105,7 +105,7 @@ def fileExists(filePath: str):
 
 # returns true if a dir exists, false if not
 def dirExists(dirPath: str):
-    f = pathlib.Path(filePath)
+    f = pathlib.Path(dirPath)
     return f.is_dir()
 
 
