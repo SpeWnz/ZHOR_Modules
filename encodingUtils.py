@@ -24,6 +24,18 @@ def base64_encodeString(input_string: str):
     
     return encoded_string
 
+def base64_decodeString(input_string: str):
+    # Encode the input string to bytes using utf-8 encoding
+    input_bytes = input_string.encode('utf-8')
+    
+    # Use base64 encoding to encode the bytes
+    decoded_bytes = base64.b64decode(input_bytes)
+    
+    # Decode the bytes back to string and return
+    decoded_string = decoded_bytes.decode('utf-8')
+    
+    return decoded_string
+
 # # bash -c {echo,bHMgLWFsCg==}|{base64,-d}|{bash,-i}
 def bashEncode_command(inputCommand: str):
     base64Command = base64_encodeString(inputCommand)

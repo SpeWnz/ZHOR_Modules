@@ -6,9 +6,11 @@ import hashlib
 # PARENT MODULES
 
 if __name__ == "__main__":
-    pass
+    import nicePrints as np
+    import osUtils as osu
 else:
-    pass
+    from . import nicePrints as np
+    from . import osUtils as osu    
 
 # =============================================================================
 
@@ -22,6 +24,10 @@ def getFilePath_withoutExtention(filePath: str):
 # dato un path di un file restituisce il nome del file senza estensione
 def getFileName_withoutExtention(filePath: str):
     temp = getFilePath_withoutExtention(filePath)
+
+    if osu.isWindows():
+        return temp.split("\\")[-1]
+
     return temp.split("/")[-1]
 
 # dato un path di un file restituisce l'estensione del file
